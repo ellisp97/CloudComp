@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="knockout-3.4.2.js"></script>
+    <script type="text/javascript">
+        
+        $(document).ready(function() {
+            var recipeViewModel = function() {
+            var self = this;
+            self.recipeID   = ko.observable("");
+            self.Method = ko.observable("");
+            self.Ingredients   = ko.observable("");
+            self.recipeName   = ko.observable("");
+
+            self.getRecipeDetails = function () {              
+                $.ajax({
+                    url: 'https://dldlrqr50d.execute-api.eu-west-1.amazonaws.com/Dev/LAMBDAFUNC',
+                    cache: false,
+                    type: 'GET',                   
+                    data: { "RecipeID": self.searchKey() },
+                    success: function (data) {              
+                        self.recipeName(data.Item.RecipeName),
+                        self.recipeMethod(data.Item.Method)
+                        self.recipeMethod(data.Item.Ingredients)
+                    }
+                });
+            }
+        }
+            var viewModel = new recipeViewModel;
+            ko.applyBindings(viewModel);
+         });
+       
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Search Key(RecipeID):</td>
+            <td><input type="text" id="txtSearchKey" data-bind="value : searchKey"/></td>
+        </tr>
+    </table>
+
+    <br />
+  
+    <table id="RecipeDetails">
+        <thead>
+
+            <tr>
+                <td>Recipe Name:</td>
+                <td><label id="RecipeID" data-bind="text: RecipeID"/></td>
+            </tr>
+            <tr>
+                <td>Recipe Name:</td>
+                <td><label id="RecipeName" data-bind="text: RecipeName"/></td>
+            </tr>
+
+            <tr>
+                <td> Method:</td>
+                <td><label id="Ingredients" data-bind="text: Ingredients"/></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><label id="Method" data-bind="text: Method"/></td>
+            </tr>
+          
+        </thead>
+      
+        </table>
+
+    <br />
+  
+  <table>
+<tr>
+    <td><input type="button" value="getRecipeDetails" data-bind="click: $root.getRecipeDetails()"/></td>
+</tr>
+  </table>
+</body>
+</html>

@@ -10,21 +10,21 @@
         $(document).ready(function() {
             var recipeViewModel = function() {
             var self = this;
-            self.recipeID   = ko.observable("");
+            self.RecipeID   = ko.observable("");
             self.Method = ko.observable("");
             self.Ingredients   = ko.observable("");
-            self.recipeName   = ko.observable("");
+            self.RecipeName   = ko.observable("");
 
-            self.getRecipeDetails = function () {              
+            self.getRecipeByID = function () {              
                 $.ajax({
-                    url: 'https://dldlrqr50d.execute-api.eu-west-1.amazonaws.com/Dev/LAMBDAFUNC',
+                    url: 'https://wbzki5ae1e.execute-api.eu-west-2.amazonaws.com/test/getrecipebyid',
                     cache: false,
                     type: 'GET',                   
                     data: { "RecipeID": self.searchKey() },
                     success: function (data) {              
-                        self.recipeName(data.Item.RecipeName),
-                        self.recipeMethod(data.Item.Method)
-                        self.recipeMethod(data.Item.Ingredients)
+                        self.RecipeName(data.Item.RecipeName),
+                        self.Method(data.Item.Method)
+                        self.Ingredients(data.Item.Ingredients)
                     }
                 });
             }
@@ -74,7 +74,7 @@
   
   <table>
 <tr>
-    <td><input type="button" value="getRecipeDetails" data-bind="click: $root.getRecipeDetails()"/></td>
+    <td><input type="button" value="getRecipeByID" data-bind="click: $root.getRecipeByID()"/></td>
 </tr>
   </table>
 </body>

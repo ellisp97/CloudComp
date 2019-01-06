@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="knockout-3.4.2.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+        function addRecipe( e ) {
+            this.RecipeID   = ko.observable("");
+            this.method = ko.observable("");
+            this.ingredients   = ko.observable("");
+            this.recipeName   = ko.observable("");
+            console.log(this)
+                $.ajax({
+                    url: 'https://wbzki5ae1e.execute-api.eu-west-2.amazonaws.com/test/getrecipebyid',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: "{'RecipeID' : '7','ingredients' : 'pasta, olive oil', 'method' : 'cook pasta, mix in olive oil','recipeName' : 'Bglio Olio'}",
+                    success: function (data) {
+                        console.log($(this))
+                        alert("yay")
+                    }
+                });
+            }
+            $('#recipe_form').submit( addRecipe );
+         });
+
+    </script>
+</head>
+
+<body>
+    <form id="recipe_form" action="#">
+        <h3> Your RecipeID: </h3>
+        <input type="text" placeholder="RecipeID" name="RecipeID" data-bind="value : RecipeID" />
+        <br />
+        <h3> Your Recipe title: </h3>
+        <input type="text" placeholder="Recipe Title" name="recipeName" data-bind="value : recipeName" />
+        <br />
+        <h3>Ingredients:</h3>
+        <div class="ingredients-container">
+            <input type="text" placeholder="Ingredient" name="ingredients" data-bind="value : ingredients" />
+        </div>
+        <br />
+        <h3>Method:</h3>
+        <div class="steps-container">
+            <input type="text" placeholder="Step" name="method" data-bind="value : method"/>
+            <br />
+        </div>
+        <br />
+        <button type="submit" class="submit-button"> Submit recipe </button>
+    </form>
+
+
+</body>
+</html>

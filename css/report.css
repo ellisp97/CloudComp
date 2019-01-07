@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+
+/* Desktop Formatting */
+body {
+    font-family: 'Helvetica';
+    font-size: 1em;
+    line-height: 1.5em;
+    background-color: white;
+    text-align: left;
+    color: Darkslategrey ;
+
+}
+
+h2 {
+    font-family: 'Righteous', cursive;
+    color : #88958D;
+    font-size: 30px;
+    line-height : 1.25em;
+}

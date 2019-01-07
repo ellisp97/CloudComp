@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Recipe 1</title>
+        <link href="stylesheets/recipe-filler.css" rel="stylesheet"></link>
+        <link href="stylesheets/nav-bar.css" rel="stylesheet"></link>
+        <script src="javascript/nav-bar.js" type="text/javascript" defer="defer"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="javascript/recipe-filler.js" type="text/javascript" defer="defer"></script>
+
+    </head>
+
+    <body>
+        <header>
+            <h1>Bake Stuff.</h1>
+            <p>Mo' Cake Less Problems</p>
+            <img src="images/title.svg"  class ="title-logo"/>
+        </header>
+        <div class="spacer">.</div>
+        <div class="navbar-container">
+            <nav>
+                <a class="nav-button" id="home">Home</a>
+                <a class="nav-button" id="recipes">Recipes</a>
+                <a class="nav-button" id="about">About Us</a>
+                <a class="nav-button" id="submit">Submit a recipe</a>
+            </nav>
+        </div>
+        <br />
+        <form id="recipe_form" action="javascript:submitData()" method="POST">
+            <h3> Your Recipe title: </h3>
+            <input type="text" placeholder="Recipe Title" name="recipe_name" />
+            <br />
+            <h3> Your Recipe Description: </h3>
+            <input class = "recipe-description-box" type="text" placeholder="Description" name="recipe_description" />
+            <br />
+            <h3>Ingredients:</h3>
+            <div class="ingredients-container">
+                <input type="text" placeholder="Ingredient Qty." name="ingredient_quantity[1]" />
+                <input type="text" placeholder="Ingredient" name="ingredient_name[1]" />
+                <br />
+            </div>
+            <button class="add-field-ingredients">Add Another Ingredient &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+            <br />
+            <h3>Method:</h3>
+            <div class="steps-container">
+                <input type="text" placeholder="Step" name="step_description[1]" />
+                <br />
+            </div>
+            <button class="add-field-steps">Add Another Step &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+            <br />
+            <input id="ingredientsNum" type="hidden" value="1" />
+            <input id="stepsNum" type="hidden" value="1" />
+            <br />
+            <button type="submit" class="submit-button"><span>Submit my <br/> recipe </span></button>
+        </form>
+
+        <footer>
+            <br />
+            <div class="footer-bar"> . </div>
+
+            <div class="social-media-box">
+                <div id="connect-text">
+                    <p> Connect with us </p>
+                </div>
+                <a href="[full link to your Facebook]">
+                    <img title="Facebook" alt="Facebook" src="images/social-media/Facebook.svg" width="35" height="35" />
+                </a>
+                <a href="[full link to your Instagram]">
+                    <img title="Instagram" alt="Instagram" src="images/social-media/Instagram.svg" width="35" height="35" />
+                </a>
+                <a href="[full link to your Pinterest page]">
+                    <img title="Pinterest" alt="Pinterest" src="images/social-media/Pinterest.svg" width="35" height="35" />
+                </a>
+                <a href="[full link to your Tumblr]">
+                    <img title="Tumblr" alt="Tumblr" src="images/social-media/Tumblr.svg" width="35" height="35" />
+                </a>
+            </div>
+          <!-- Illustrations by <a target="_blank" href="https://www.vecteezy.com">Vecteezy!</a> -->
+        </footer>
+    </body>
+
+</html>

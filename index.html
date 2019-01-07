@@ -5,7 +5,13 @@
     <meta charset="utf-8" />
     <script src="jquery-3.1.1.min.js"></script>
     <script src="knockout-3.4.2.js"></script>
+    <link href="css/recipe.css" rel="stylesheet"></link>
+    <link href="js/main.js" defer="defer"></link>
+
     <script type="text/javascript">
+    function goRecipePage() {
+        location.href = "http://cloud-coursework-manan-ellis.s3-website.eu-west-2.amazonaws.com/recipe_submit.html";
+    }
         
         $(document).ready(function() {
             var recipeViewModel = function() {
@@ -14,6 +20,7 @@
             self.Method = ko.observable("");
             self.Ingredients   = ko.observable("");
             self.RecipeName   = ko.observable("");
+            self.searchKey   = ko.observable("");
 
             self.getRecipeByID = function () {              
                 $.ajax({
@@ -23,59 +30,63 @@
                     data: { "RecipeID": self.searchKey() },
                     success: function (data) {              
                         self.RecipeName(data.Item.RecipeName),
-                        self.Method(data.Item.Method)
+                        self.Method(data.Item.Method),
                         self.Ingredients(data.Item.Ingredients)
                     }
                 });
-            }
-        }
-            var viewModel = new recipeViewModel;
-            ko.applyBindings(viewModel);
-         });
-       
+            };
+        };
+        var viewModel = new recipeViewModel;
+        ko.applyBindings(viewModel);    
+    });
     </script>
 </head>
 <body>
-    <table>
-        <tr>
-            <td>Search Key(RecipeID):</td>
-            <td><input type="text" id="txtSearchKey" data-bind="value : searchKey"/></td>
-        </tr>
-    </table>
-
-    <br />
-  
-    <table id="RecipeDetails">
-        <thead>
-
+    <div id="container">
+        <table>
             <tr>
-                <td>Recipe ID:</td>
-                <td><label id="RecipeID" data-bind="text: RecipeID"/></td>
+                <td>Search Key(RecipeID):</td>
+                <td><input type="text" id="txtSearchKey" data-bind="value : searchKey"/></td>
             </tr>
-            <tr>
-                <td>Recipe Name:</td>
-                <td><label id="RecipeName" data-bind="text: RecipeName"/></td>
-            </tr>
-
-            <tr>
-                <td> Ingredients:</td>
-                <td><label id="Ingredients" data-bind="text: Ingredients"/></td>
-            </tr>
-            <tr>
-                <td>Method:</td>
-                <td><label id="Method" data-bind="text: Method"/></td>
-            </tr>
-          
-        </thead>
-      
         </table>
+
+        <br />
+    
+        <table id="RecipeDetails">
+            <thead>
+
+                <tr>
+                    <td>Recipe ID:</td>
+                    <td><label id="RecipeID" data-bind="text: RecipeID"/></td>
+                </tr>
+                <tr>
+                    <td>Recipe Name:</td>
+                    <td><label id="RecipeName" data-bind="text: RecipeName"/></td>
+                </tr>
+
+                <tr>
+                    <td> Ingredients:</td>
+                    <td><label id="Ingredients" data-bind="text: Ingredients"/></td>
+                </tr>
+                <tr>
+                    <td>Method:</td>
+                    <td><label id="Method" data-bind="text: Method"/></td>
+                </tr>
+            
+            </thead>
+        
+        </table>
+    </div>
 
     <br />
   
   <table>
-<tr>
-    <td><input type="button" value="getRecipeByID" data-bind="click: $root.getRecipeByID()"/></td>
-</tr>
+    <tr>
+        <td><input type="button" value="getRecipeByID" data-bind="click: $root.getRecipeByID()"/></td>
+    </tr>
   </table>
+
+  <button id="AddRecipePage" onclick="goRecipePage()">Add Recipe</button>
+
 </body>
 </html>

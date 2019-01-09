@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <script src="jquery-3.1.1.min.js"></script>
     <script src="knockout-3.4.2.js"></script>
-    <link href="css/recipe.css" rel="stylesheet"></link>
+    <link href="css/main.css" rel="stylesheet"></link>
     <link href="js/main.js" defer="defer"></link>
 
     <script type="text/javascript">
     function goRecipePage() {
-        location.href = "http://cloud-coursework-manan-ellis.s3-website.eu-west-2.amazonaws.com/recipe_submit.html";
+        location.href = "http://cloud-coursework-manan-ellis.s3-website.eu-west-2.amazonaws.com/submit.html";
     }
         
         $(document).ready(function() {
@@ -42,7 +42,7 @@
     </script>
 </head>
 <body>
-    <div id="container">
+    <div class="RecipeForm">
         <table>
             <tr>
                 <td>Search Key(RecipeID):</td>
@@ -52,7 +52,7 @@
 
         <br />
     
-        <table id="RecipeDetails">
+        <table class="RecipeDetails">
             <thead>
 
                 <tr>
@@ -76,17 +76,12 @@
             </thead>
         
         </table>
-    </div>
-
-    <br />
+    
   
-  <table>
-    <tr>
-        <td><input type="button" value="getRecipeByID" data-bind="click: $root.getRecipeByID()"/></td>
-    </tr>
-  </table>
-
-  <button id="AddRecipePage" onclick="goRecipePage()">Add Recipe</button>
-
+        <table class = "RecipeSearch">
+            <button onclick="goRecipePage()">AddRecipe</button>
+            <tr><td><button><input type="button" value="Get Recipe" data-bind="click: $root.getRecipeByID()"/></button></td></tr>
+        </table>
+    </div>
 </body>
 </html>

@@ -1,10 +1,16 @@
 # Recipe Cloud CW
 
-Get and Post configured with s3/DynamoDB
-Uses Lambda for Serverless Functionality
+## AWS - Services
+* DynamoDB
+* S3
+* Lambda
+* CloudWatch
+* Route53
+* API Gateway
 
 
-## ToDo:
-Make Scalable
-Form Submission
-Site Re-Design 
+Implements interactive Recipe Form. Uses API Gateway to trigger lambda functions to control adding and retrieving of recipes. 
+
+
+Endpoint: https://www.easypeasyrecipe.co.uk 
+

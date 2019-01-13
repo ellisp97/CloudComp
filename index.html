@@ -6,32 +6,32 @@
     <script src="jquery-3.1.1.min.js"></script>
     <script src="knockout-3.4.2.js"></script>
     <link href="css/main.css" rel="stylesheet"></link>
-    <link href="js/main.js" defer="defer"></link>
 
     <script type="text/javascript">
     function goRecipePage() {
-        location.href = "http://cloud-coursework-manan-ellis.s3-website.eu-west-2.amazonaws.com/submit.html";
+        location.href = "http://globe.easypeasyrecipe.co.uk/submit.html";
     }
         
         $(document).ready(function() {
             var recipeViewModel = function() {
             var self = this;
-            self.RecipeID   = ko.observable("");
+            self.RecipeName   = ko.observable("");
             self.Method = ko.observable("");
             self.Ingredients   = ko.observable("");
-            self.RecipeName   = ko.observable("");
+            self.RecipeTime   = ko.observable("");
             self.searchKey   = ko.observable("");
 
             self.getRecipeByID = function () {              
                 $.ajax({
-                    url: 'https://wbzki5ae1e.execute-api.eu-west-2.amazonaws.com/test/getrecipebyid',
+                    url: 'https://globe.easypeasyrecipe.co.uk/dev/get/' + '${RecipeName}',
                     cache: false,
                     type: 'GET',                   
-                    data: { "RecipeID": self.searchKey() },
+                    data: { "RecipeName": self.searchKey() },
                     success: function (data) {              
                         self.RecipeName(data.Item.RecipeName),
                         self.Method(data.Item.Method),
-                        self.Ingredients(data.Item.Ingredients)
+                        self.Ingredients(data.Item.Ingredients),
+                        self.RecipeTime(data.Item.RecipeTime)
                     }
                 });
             };
@@ -54,16 +54,14 @@
     
         <table class="RecipeDetails">
             <thead>
-
                 <tr>
-                    <td>Recipe ID:</td>
-                    <td><label id="RecipeID" data-bind="text: RecipeID"/></td>
+                    <td>Recipe Name:</td>
+                    <td><label id="RecipeName"  placeholder="Recipe Name" data-bind="text: RecipeName"/></td>
                 </tr>
                 <tr>
                     <td>Recipe Name:</td>
-                    <td><label id="RecipeName" data-bind="text: RecipeName"/></td>
+                    <td><label id="RecipeTime"  placeholder="First name" data-bind="text: RecipeTime"/></td>
                 </tr>
-
                 <tr>
                     <td> Ingredients:</td>
                     <td><label id="Ingredients" data-bind="text: Ingredients"/></td>
@@ -72,16 +70,14 @@
                     <td>Method:</td>
                     <td><label id="Method" data-bind="text: Method"/></td>
                 </tr>
-            
             </thead>
         
         </table>
     
-  
-        <table class = "RecipeSearch">
+        <div class = "flex">
             <button onclick="goRecipePage()">AddRecipe</button>
-            <tr><td><button><input type="button" value="Get Recipe" data-bind="click: $root.getRecipeByID()"/></button></td></tr>
-        </table>
+            <tr><td><input type="button" value="Get Recipe" data-bind="click: $root.getRecipeByID()"/></td></tr>
+        </div>
     </div>
 </body>
 </html>

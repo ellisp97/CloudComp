@@ -5,10 +5,11 @@
     <meta charset="utf-8" />
     <script src="jquery-3.1.1.min.js"></script>
     <script src="knockout-3.4.2.js"></script>
+    <link href="css/main.css" rel="stylesheet"></link>
+
     <script type="text/javascript">
     function goRecipePage() {
-        location.href = "http://cloud-coursework-manan-ellis.s3-website.eu-west-2.amazonaws.com/index.html";
-
+        location.href = "http://globe.easypeasyrecipe.co.uk/index.html";
     }
         $(document).ready(function() {
             // var recipeViewModel = function() {
@@ -22,12 +23,12 @@
                     // at this stage the result object will look as expected so you could use it
                     // console.log(this)
                     $.ajax({
-                        url: 'https://wbzki5ae1e.execute-api.eu-west-2.amazonaws.com/test/getrecipebyid',
+                        url: 'https://globe.easypeasyrecipe.co.uk/dev/create',
                         type: 'POST',
                         contentType: 'application/json',
-                        data: "{'RecipeID' : '" + result.RecipeID + "','ingredients' : '" + result.ingredients + "', 'method' : ' " + result.method + " ','recipeName' : ' " + result.recipeName + "'}",
+                        data: "{'RecipeName' : '" + result.RecipeName + "','Ingredients' : '" + result.Ingredients + "', 'method' : ' " + result.Method + " ','RecipeTime' : ' " + result.RecipeTime + "'}",
                         success: function (data) {
-                            console.log(result.RecipeID);
+                            console.log(result.RecipeName);
                             alert("yay")
                         }
                     });
@@ -42,21 +43,21 @@
 </head>
 
 <body>
-    <form id="recipe_form" action="#">
-        <h3> Your RecipeID: </h3>
-        <input type="text" placeholder="RecipeID" name="RecipeID" />
+    <form class="RecipeForm" action="#">
+        <h3> Your Recipe Name: </h3>
+        <input type="text" placeholder="RecipeName" name="RecipeName" />
         <br />
-        <h3> Your Recipe title: </h3>
-        <input type="text" placeholder="Recipe Title" name="recipeName"/>
+        <h3> Your Recipe Time: </h3>
+        <input type="text" placeholder="Recipe Time" name="RecipeTime"/>
         <br />
         <h3>Ingredients:</h3>
         <div class="ingredients-container">
-            <input type="text" placeholder="Ingredient" name="ingredients" data-bind="value : ingredients" />
+            <input type="text" placeholder="Ingredient" name="Ingredients" data-bind="value : Ingredients" />
         </div>
         <br />
         <h3>Method:</h3>
         <div class="steps-container">
-            <input type="text" placeholder="Step" name="method" data-bind="value : method"/>
+            <input type="text" placeholder="Step" name="Method" data-bind="value : Method"/>
             <br />
         </div>
         <br />

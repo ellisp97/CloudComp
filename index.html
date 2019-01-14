@@ -9,7 +9,7 @@
 
     <script type="text/javascript">
     function goRecipePage() {
-        location.href = "http://globe.easypeasyrecipe.co.uk/submit.html";
+        location.href = "http://globe.easypeasyrecipe.co.uk.s3-website.eu-west-2.amazonaws.com/submit.html";
     }
         
         $(document).ready(function() {
@@ -21,9 +21,10 @@
             self.RecipeTime   = ko.observable("");
             self.searchKey   = ko.observable("");
 
-            self.getRecipeByID = function () {              
+            self.getRecipeByID = function () {
+                var siv = document.getElementById("txtSearchKey").value;   
                 $.ajax({
-                    url: 'https://globe.easypeasyrecipe.co.uk/dev/get/' + '${RecipeName}',
+                    url: 'https://rqsq5ehe54.execute-api.eu-west-2.amazonaws.com/dev/get/' + siv,
                     cache: false,
                     type: 'GET',                   
                     data: { "RecipeName": self.searchKey() },
@@ -36,10 +37,12 @@
                 });
             };
         };
+        
         var viewModel = new recipeViewModel;
         ko.applyBindings(viewModel);    
     });
     </script>
+
 </head>
 <body>
     <div class="RecipeForm">
@@ -56,11 +59,11 @@
             <thead>
                 <tr>
                     <td>Recipe Name:</td>
-                    <td><label id="RecipeName"  placeholder="Recipe Name" data-bind="text: RecipeName"/></td>
+                    <td><label id="RecipeName"  placeholder="Try the name 'beans'" data-bind="text: RecipeName"/></td>
                 </tr>
                 <tr>
-                    <td>Recipe Name:</td>
-                    <td><label id="RecipeTime"  placeholder="First name" data-bind="text: RecipeTime"/></td>
+                    <td>Recipe Time:</td>
+                    <td><label id="RecipeTime"  placeholder="RecipeTime" data-bind="text: RecipeTime"/></td>
                 </tr>
                 <tr>
                     <td> Ingredients:</td>

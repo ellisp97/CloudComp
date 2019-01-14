@@ -21,22 +21,20 @@ region = os.environ["AWS_REGION"]
 dynamodb = boto3.resource('dynamodb', region_name=region)
 table = dynamodb.Table('RecipeTable')
 
-
-
 def get_from_dynamo(event):
     log.debug("Received in get_from_dynamo: {}".format(json.dumps(event)))
-    RecipeName = event['pathParameters']["RecipeName"]    
+    RecipeName = event['pathParameters']['RecipeName']    
     log.debug("RecipeName: {}".format(RecipeName))
     item = table.get_item(
         Key={
             'RecipeName' : RecipeName
         }
     )
-    Method = item.get("Method", )
+    log.debug(RecipeName)
+    log.debug("======")
     log.debug(item)
-    log.debug("==========")
-    log.debug(Method)
-
+    log.debug(event)
+    log.debug(event['pathParameters'])
     return item["Item"]
 
 

@@ -1,4 +1,10 @@
-service: blog
+service: Recipe
+custom:
+  customDomain:
+    domainName: globe.easypeasyrecipe.co.uk
+    basePath: ''
+    stage: dev
+    createRoute53Record: true
 provider:
   name: aws
   runtime: python2.7
@@ -10,8 +16,8 @@ provider:
          Action:
            - "dynamodb:*"
          Resource:
-           - "arn:aws:dynamodb:eu-west-2:298879669036:table/MyGlobalTable"
-           - "arn:aws:dynamodb:us-east-1:298879669036:table/MyGlobalTable"
+           - "arn:aws:dynamodb:eu-west-2:298879669036:table/RecipeTable"
+           - "arn:aws:dynamodb:eu-central-1:298879669036:table/RecipeTable"
       -  Effect: "Allow"
          Action:
            - "logs:CreateLogGroup"
@@ -29,20 +35,26 @@ package:
     - .git/**
 
 functions:
-  get_item:
-    handler: get.get_item
+  no-op:
+    name: NoOp
+    handler: hello.noop
     events:
-      - http:
-          path: get/{item_id}
-          method: GET
-          cors: true
-
-  create_item:
-    handler: post.create_item
+      - http: POST noOp
+      
+  create_recipe:
+    handler: addRecipe.create_recipe
     events:
       - http:
           path: create
           method: POST
+          cors: true
+
+  get_recipe:
+    handler: getRecipe.get_recipe
+    events:
+      - http:
+          path: get/{RecipeName}
+          method: GET
           cors: true
 
   get_health:

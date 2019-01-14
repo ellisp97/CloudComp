@@ -6,7 +6,16 @@ body ,html {
     background-color: rgba(254,254,254,.1);
     font-size: 18px;
 }
-
+#RecipeForm {
+    position: relative;
+    width: auto;
+    height: auto;
+    padding: 15px;
+    background-color: grey;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
 .RecipeForm {
     position: relative;
     width: auto;
@@ -99,7 +108,7 @@ label {
     float: left;
     font-size: 18px;
 }
-label:after { content: ": " }
+label:after { content: " " }
     
 #txtSearchKey{
     padding: 10px;

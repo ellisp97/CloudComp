@@ -9,7 +9,7 @@
 
     <script type="text/javascript">
     function goRecipePage() {
-        location.href = "http://globe.easypeasyrecipe.co.uk/index.html";
+        location.href = "http://globe.easypeasyrecipe.co.uk.s3-website.eu-west-2.amazonaws.com/index.html";
     }
         $(document).ready(function() {
             // var recipeViewModel = function() {
@@ -23,27 +23,36 @@
                     // at this stage the result object will look as expected so you could use it
                     // console.log(this)
                     $.ajax({
-                        url: 'https://globe.easypeasyrecipe.co.uk/dev/create',
+                        url: 'https://rqsq5ehe54.execute-api.eu-west-2.amazonaws.com/dev/create',
                         type: 'POST',
                         contentType: 'application/json',
                         data: "{'RecipeName' : '" + result.RecipeName + "','Ingredients' : '" + result.Ingredients + "', 'method' : ' " + result.Method + " ','RecipeTime' : ' " + result.RecipeTime + "'}",
                         success: function (data) {
                             console.log(result.RecipeName);
-                            alert("yay")
+                            alert("Item Added")
                         }
                     });
                 };
             // };
             // var viewModel = new recipeViewModel;
             // ko.applyBindings(viewModel);
-            $('#recipe_form').submit( addRecipe );
+            $('#RecipeForm').submit( addRecipe );
          });
 
     </script>
 </head>
 
+submit.html?RecipeName=xx&RecipeTime=xx&Ingredients=xx&Method=xx:30 ==========
+submit.html?RecipeName=xx&RecipeTime=xx&Ingredients=xx&Method=xx:32 xx
+submit.html?RecipeName=xx&RecipeTime=xx&Ingredients=xx&Method=xx:35 Uncaught ReferenceError: aler is not defined
+    at HTMLFormElement.addRecipe (submit.html?RecipeName=xx&RecipeTime=xx&Ingredients=xx&Method=xx:35)
+    at HTMLFormElement.dispatch (jquery-3.1.1.min.js:3)
+    at HTMLFormElement.q.handle (jquery-3.1.1.min.js:3)
+addRecipe @ submit.html?RecipeName=xx&RecipeTime=xx&Ingredients=xx&Method=xx:35
+dispatch @ jquery-3.1.1.min.js:3
+q.handle @ jquery-3.1.1.min.js:3
 <body>
-    <form class="RecipeForm" action="#">
+    <form id="RecipeForm" action="#">
         <h3> Your Recipe Name: </h3>
         <input type="text" placeholder="RecipeName" name="RecipeName" />
         <br />
